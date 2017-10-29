@@ -237,12 +237,12 @@ Public Class FrmMain
         xlWorkSheet = xlWorkBook.Sheets.Add()
         xlWorkSheet.Name = "DVDD_LN"
         ' Ghi tiêu đề cột
-        xlWorkSheet.Cells(1, 1) = "DVDD"
-        For j = 1 To v_slgLUT
-            xlWorkSheet.Cells(1, j + 1) = "LN_LUT" & j
-        Next
-        For i = 0 To v_slgDVDD - 1
-            For j = 0 To v_slgLUT ' grdLUT có 3 cột
+
+        xlWorkSheet.Cells(1, 1) = "LUT"
+        xlWorkSheet.Cells(1, 2) = "loinhuan"
+    
+        For i = 0 To v_slgLUT - 1
+            For j = 0 To 1 ' 
                 xlWorkSheet.Cells(i + 2, j + 1) = grdLoinhuan(j, i).Value
             Next
         Next
@@ -428,6 +428,8 @@ Public Class FrmMain
             objAdapterXLS.SelectCommand.ExecuteNonQuery()
             objAdapterXLS.Fill(dt_DVDD)
             grdDVDD.DataSource = Nothing
+            grdDVDD.Rows.Clear()
+            grdDVDD.Columns.Clear()
             'grdDVDD.Rows.Clear()
             grdDVDD.DataSource = dt_DVDD
 
@@ -444,6 +446,8 @@ Public Class FrmMain
             objAdapterXLS.Fill(dt_LUT)
             'grdLUT.Rows.Clear()
             grdLUT.DataSource = Nothing
+            grdLUT.Rows.Clear()
+            grdLUT.Columns.Clear()
             grdLUT.DataSource = dt_LUT
             'Catch
 
@@ -458,6 +462,8 @@ Public Class FrmMain
             objAdapterXLS.Fill(dt_Moitruong)
             'grdLUT.Rows.Clear()
             grdMoitruong.DataSource = Nothing
+            grdMoitruong.Rows.Clear()
+            grdMoitruong.Columns.Clear()
             grdMoitruong.DataSource = dt_Moitruong
             'Catch
 
@@ -472,6 +478,8 @@ Public Class FrmMain
             objAdapterXLS.Fill(dt_Laodong)
             'grdLUT.Rows.Clear()
             grdLaodong.DataSource = Nothing
+            grdLaodong.Rows.Clear()
+            grdLaodong.Columns.Clear()
             grdLaodong.DataSource = dt_Laodong
             'Catch
 
@@ -488,6 +496,8 @@ Public Class FrmMain
                 'grdThichNghi.Rows.Clear()
                 'grdThichNghi.Columns.Clear()
                 grdThichNghi.DataSource = Nothing
+                grdThichNghi.Rows.Clear()
+                grdThichNghi.Columns.Clear()
                 grdThichNghi.DataSource = dt_Thichnghi
 
             Catch
@@ -505,6 +515,8 @@ Public Class FrmMain
                 'grdChiphi.Rows.Clear()
                 'grdChiphi.Columns.Clear()
                 grdChiphi.DataSource = Nothing
+                grdChiphi.Rows.Clear()
+                grdChiphi.Columns.Clear()
                 grdChiphi.DataSource = dt_Chiphi
             Catch
 
@@ -521,6 +533,8 @@ Public Class FrmMain
                 'grdLoinhuan.Rows.Clear()
                 'grdLoinhuan.Columns.Clear()
                 grdLoinhuan.DataSource = Nothing
+                grdLoinhuan.Rows.Clear()
+                grdLoinhuan.Columns.Clear()
                 grdLoinhuan.DataSource = dt_loinhuan
             Catch
 
@@ -537,6 +551,8 @@ Public Class FrmMain
                 'grdRangbuoc.Rows.Clear()
                 'grdRangbuoc.Columns.Clear()
                 grdRangbuoc.DataSource = Nothing
+                grdRangbuoc.Rows.Clear()
+                grdRangbuoc.Columns.Clear()
                 grdRangbuoc.DataSource = dt_Rangbuoc
             Catch
 

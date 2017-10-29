@@ -84,7 +84,6 @@ Partial Class FrmMain
         Me.grdChiphi = New System.Windows.Forms.DataGridView()
         Me.tabLoinhuan_dvdd = New System.Windows.Forms.TabPage()
         Me.grdLoinhuan = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn19 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabLaodong = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtTogngaycong = New System.Windows.Forms.TextBox()
@@ -102,7 +101,9 @@ Partial Class FrmMain
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.grdKetqua = New System.Windows.Forms.DataGridView()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.txtTongLN = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblHammuctieu = New System.Windows.Forms.Label()
@@ -115,8 +116,6 @@ Partial Class FrmMain
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblTaskbar = New System.Windows.Forms.ToolStripStatusLabel()
         Me.taskProgressbar = New System.Windows.Forms.ToolStripProgressBar()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtTongLN = New System.Windows.Forms.TextBox()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolMain.SuspendLayout()
         Me.tabMain.SuspendLayout()
@@ -631,18 +630,11 @@ Partial Class FrmMain
         'grdLoinhuan
         '
         Me.grdLoinhuan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdLoinhuan.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn19})
         Me.grdLoinhuan.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdLoinhuan.Location = New System.Drawing.Point(3, 3)
         Me.grdLoinhuan.Name = "grdLoinhuan"
         Me.grdLoinhuan.Size = New System.Drawing.Size(1158, 461)
         Me.grdLoinhuan.TabIndex = 5
-        '
-        'DataGridViewTextBoxColumn19
-        '
-        Me.DataGridViewTextBoxColumn19.DataPropertyName = "DVDD"
-        Me.DataGridViewTextBoxColumn19.HeaderText = "Mã ĐVĐĐ"
-        Me.DataGridViewTextBoxColumn19.Name = "DataGridViewTextBoxColumn19"
         '
         'TabLaodong
         '
@@ -824,6 +816,13 @@ Partial Class FrmMain
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Phương án tối ưu hóa"
         '
+        'txtTongLN
+        '
+        Me.txtTongLN.Location = New System.Drawing.Point(252, 201)
+        Me.txtTongLN.Name = "txtTongLN"
+        Me.txtTongLN.Size = New System.Drawing.Size(177, 20)
+        Me.txtTongLN.TabIndex = 11
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -832,6 +831,15 @@ Partial Class FrmMain
         Me.Label5.Size = New System.Drawing.Size(230, 13)
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Ràng buộc:  Sum( [CP(LUT)] x [X]) <= Tổng CP"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(14, 204)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(193, 13)
+        Me.Label7.TabIndex = 10
+        Me.Label7.Text = "Giá trị hàm mục tiêu tối ưu (LN*LĐ*MT) "
         '
         'Label6
         '
@@ -941,22 +949,6 @@ Partial Class FrmMain
         '
         Me.taskProgressbar.Name = "taskProgressbar"
         Me.taskProgressbar.Size = New System.Drawing.Size(100, 16)
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(14, 204)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(193, 13)
-        Me.Label7.TabIndex = 10
-        Me.Label7.Text = "Giá trị hàm mục tiêu tối ưu (LN*LĐ*MT) "
-        '
-        'txtTongLN
-        '
-        Me.txtTongLN.Location = New System.Drawing.Point(252, 201)
-        Me.txtTongLN.Name = "txtTongLN"
-        Me.txtTongLN.Size = New System.Drawing.Size(177, 20)
-        Me.txtTongLN.TabIndex = 11
         '
         'FrmMain
         '
@@ -1084,7 +1076,6 @@ Partial Class FrmMain
     Friend WithEvents DataGridViewTextBoxColumn13 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn14 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn19 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents grdKetqua As System.Windows.Forms.DataGridView
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator

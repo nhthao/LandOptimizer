@@ -52,20 +52,28 @@ Public Class frmNewProject
         ' Doc thuoc tinh DVDD tu dang dbf cua ban do
 
         ''  Dua du lieu thuoc tinh vao Grid
-
-        FrmMain.grdDVDD.DataSource = theDataSet
-        FrmMain.grdDVDD.Refresh()
-        If chkMaDVDDMoi.Checked Then
-            For i = 0 To v_slgDVDD - 1
-                FrmMain.grdDVDD.Item(0, i).Value = "ĐVDD" & Trim(Str(i + 1))
-            Next
+        If theDataSet.Rows.Count > 0 Then
+            FrmMain.grdDVDD.DataSource = theDataSet
+            FrmMain.grdDVDD.Refresh()
+            If chkMaDVDDMoi.Checked Then
+                For i = 0 To v_slgDVDD - 1
+                    FrmMain.grdDVDD.Item(0, i).Value = "ĐVDD" & Trim(Str(i + 1))
+                Next
+            Else
+                ' Lay ten DVDD tu cot ma dvdd
+                For i = 0 To theDataSet.Rows.Count - 1
+                    FrmMain.grdDVDD.Item(0, i).Value = theDataSet.Rows(i)(cboColumnName.SelectedIndex)
+                Next
+            End If
         Else
-            ' Lay ten DVDD tu cot ma dvdd
-            For i = 0 To theDataSet.Rows.Count - 1
-                FrmMain.grdDVDD.Item(0, i).Value = theDataSet.Rows(i)(cboColumnName.SelectedIndex)
+       
+            ' Tạo ra số dòng theo số lượng ĐVĐ
+            For i = 0 To v_slgDVDD - 1
+                'FrmMain.grdDVDD.RowHeadersBorderStyle
+                Dim row As String() = New String() {"DVDD" & Trim(Str(i + 1))}
+                FrmMain.grdDVDD.Rows.Add(row)
             Next
         End If
-
     End Sub
 
     Private Sub createGrdLUT()
@@ -124,6 +132,7 @@ Public Class frmNewProject
         '_____________
         FrmMain.grdChiphi.DataSource = Nothing
         FrmMain.grdChiphi.Rows.Clear()
+        FrmMain.grdChiphi.Columns.Clear()
         FrmMain.grdChiphi.ColumnCount = 2
         FrmMain.grdChiphi.Columns(0).HeaderText = "Mã LUT"
         FrmMain.grdChiphi.Columns(1).HeaderText = "Chi phí (triệu đồng)"
@@ -140,16 +149,12 @@ Public Class frmNewProject
         FrmMain.grdLoinhuan.DataSource = Nothing
         FrmMain.grdLoinhuan.Rows.Clear()
         FrmMain.grdLoinhuan.Columns.Clear()
-        FrmMain.grdLoinhuan.ColumnCount = v_slgLUT + 1
-        FrmMain.grdLoinhuan.Columns(0).HeaderText = "Mã ĐVĐĐ"
-        For i = 1 To v_slgLUT
+        FrmMain.grdLoinhuan.ColumnCount = 2 ' v_slgLUT + 1
+        FrmMain.grdLoinhuan.Columns(0).HeaderText = "Mã LUT"
+        FrmMain.grdLoinhuan.Columns(1).HeaderText = "Lợi nhuận (triệu đồng)"
+        For i = 0 To v_slgLUT - 1
             'FrmMain.grdDVDD.RowHeadersBorderStyle
-            FrmMain.grdLoinhuan.Columns(i).HeaderText = "Lợi nhuận LUT" & Trim(Str(i))
-        Next
-        ' Tạo ra số dòng theo số lượng ĐVĐ
-        For i = 0 To v_slgDVDD - 1
-            'FrmMain.grdDVDD.RowHeadersBorderStyle
-            Dim row As String() = New String() {"DVDD" & Trim(Str(i + 1))}
+            Dim row As String() = New String() {"LUT" & Trim(Str(i + 1))}
             FrmMain.grdLoinhuan.Rows.Add(row)
         Next
     End Sub
