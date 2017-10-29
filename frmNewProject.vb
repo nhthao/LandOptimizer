@@ -33,6 +33,8 @@ Public Class frmNewProject
             createGrdMoitruong()
             createGrdRangbuocDientichLUT()
             'MsgBox("Đã tạo mới project xong, vui lòng nhập liệu vào các trang từ 1 - 7!", MsgBoxStyle.Information, "Thông báo")
+       
+
             Close()
         Else
             MsgBox("Vui lòng nhập số lượng ĐVĐĐ và số LUT cần tối ưu hóa", MsgBoxStyle.Information, "Thông báo")
@@ -41,26 +43,29 @@ Public Class frmNewProject
     End Sub
     Private Sub createGrdDVDD()
         Dim i As Integer
+
         FrmMain.grdDVDD.DataSource = Nothing
         FrmMain.grdDVDD.Rows.Clear()
         FrmMain.grdDVDD.ColumnCount = 1
         FrmMain.grdDVDD.Columns(0).HeaderText = "Mã ĐVĐĐ"
-        'FrmMain.grdDVDD.Columns(1).HeaderText = "Diện tích (ha)"
-        'FrmMain.grdDVDD.Columns(2).HeaderText = "Loại đất"
 
-        'FrmMain.grdDVDD.Columns(3).HeaderText = "Độ sâu ngập"
-        'FrmMain.grdDVDD.Columns(4).HeaderText = "Thời gian ngập"
-        'FrmMain.grdDVDD.Columns(5).HeaderText = "Độ sâu tằng phèn"
+        ' Doc thuoc tinh DVDD tu dang dbf cua ban do
 
-        
-        load_dbf_shp()
-        For i = 0 To v_slgDVDD - 1
-            'FrmMain.grdDVDD.RowHeadersBorderStyle
+        ''  Dua du lieu thuoc tinh vao Grid
 
-            ' Dim row As String() = New String() {"DVDD" & Trim(Str(i + 1))}
-            'FrmMain.grdDVDD.Rows.Add(row)
-            FrmMain.grdDVDD.Item(0, i).Value = "DVDD" & Trim(Str(i + 1))
-        Next
+        FrmMain.grdDVDD.DataSource = theDataSet
+        FrmMain.grdDVDD.Refresh()
+        If chkMaDVDDMoi.Checked Then
+            For i = 0 To v_slgDVDD - 1
+                FrmMain.grdDVDD.Item(0, i).Value = "ĐVDD" & Trim(Str(i + 1))
+            Next
+        Else
+            ' Lay ten DVDD tu cot ma dvdd
+            For i = 0 To theDataSet.Rows.Count - 1
+                FrmMain.grdDVDD.Item(0, i).Value = theDataSet.Rows(i)(cboColumnName.SelectedIndex)
+            Next
+        End If
+
     End Sub
 
     Private Sub createGrdLUT()
@@ -81,16 +86,16 @@ Public Class frmNewProject
     Private Sub createGrdMoitruong()
         Dim i As Integer
 
-        FrmMain.grdLUT.DataSource = Nothing
-        FrmMain.grdLUT.Rows.Clear()
-        FrmMain.grdLUT.ColumnCount = 2
-        FrmMain.grdLUT.Columns(0).HeaderText = "Mã LUT"
-        FrmMain.grdLUT.Columns(1).HeaderText = "Chỉ số cải thiện môi trường(%)"
+        FrmMain.grdMoitruong.DataSource = Nothing
+        FrmMain.grdMoitruong.Rows.Clear()
+        FrmMain.grdMoitruong.ColumnCount = 2
+        FrmMain.grdMoitruong.Columns(0).HeaderText = "Mã LUT"
+        FrmMain.grdMoitruong.Columns(1).HeaderText = "Chỉ số cải thiện môi trường(%)"
 
         For i = 0 To v_slgLUT - 1
             'FrmMain.grdDVDD.RowHeadersBorderStyle
             Dim row As String() = New String() {"LUT" & Trim(Str(i + 1))}
-            FrmMain.grdLUT.Rows.Add(row)
+            FrmMain.grdMoitruong.Rows.Add(row)
         Next
     End Sub
     Private Sub createGrdThichnghi()
@@ -160,7 +165,7 @@ Public Class frmNewProject
         For i = 0 To v_slgLUT - 1
             'FrmMain.grdDVDD.RowHeadersBorderStyle
             Dim row As String() = New String() {"LUT" & Trim(Str(i + 1))}
-            FrmMain.grdChiphi.Rows.Add(row)
+            FrmMain.grdLaodong.Rows.Add(row)
         Next
 
     End Sub
@@ -198,6 +203,37 @@ Public Class frmNewProject
         txtFileDVDD.Text = fopen.FileName
         readShapefile(v_fname)
         FrmMain.v_fileDVDD = v_fname
+        ' Mo file thuoc tinh
+        ' Doc thuoc tinh DVDD tu dang dbf cua ban do
+        'load_dbf_shp()
+        Dim cnn As New System.Data.OleDb.OleDbConnection
+        Dim da As New System.Data.OleDb.OleDbDataAdapter
+
+        Dim filePath As String = txtFileDVDD.Text
+        Dim directory As String = Path.GetDirectoryName(filePath)
+        Dim split As String() = filePath.Split("\")
+        Dim parentFolder As String = split(split.Length - 2)
+        Dim fname As String = Path.GetFileNameWithoutExtension(filePath) & ".dbf"
+        '        MsgBox("dir:" & directory & "; db file name:" & filePath & "; folder:" & parentFolder)
+        cnn.ConnectionString = "Provider=VFPOLEDB;Data Source=" & directory & ";Exclusive=Yes;Collating Sequence=machine"
+        Try
+            cnn.Open()
+            da.SelectCommand = New System.Data.OleDb.OleDbCommand("select * from " & fname, cnn)
+            da.Fill(theDataSet)
+            'FrmMain.grdDVDD.DataSource = theDataSet
+            'FrmMain.grdDVDD.Refresh()
+        Catch ex As Exception
+            MsgBox("Lỗi đọc file thuộc tính." & vbNewLine & ex.Message & vbNewLine & ex.ToString)
+        End Try
+        '' Doc ten cot du lieu vao combobox
+        Dim dc As DataColumn
+        cboColumnName.Items.Clear()
+        For Each dc In theDataSet.Columns
+            cboColumnName.Items.Add(dc.ColumnName)
+            '            MsgBox(dc.ColumnName)
+        Next
+
+
     End Sub
 
     Private Sub cmdThoat_Click(sender As Object, e As EventArgs) Handles cmdThoat.Click
@@ -343,5 +379,9 @@ Public Class frmNewProject
         Catch ex As Exception
             MsgBox("Lỗi đọc file thuộc tính." & vbNewLine & ex.Message & vbNewLine & ex.ToString)
         End Try
+    End Sub
+
+    Private Sub chkMaDVDDMoi_CheckedChanged(sender As Object, e As EventArgs) Handles chkMaDVDDMoi.CheckedChanged
+
     End Sub
 End Class

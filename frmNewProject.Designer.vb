@@ -27,19 +27,19 @@ Partial Class frmNewProject
         Me.cmdKhoitao = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkMaDVDDMoi = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cboColumnName = New System.Windows.Forms.ComboBox()
         Me.btnBrowseProject = New System.Windows.Forms.Button()
         Me.btnBrowseDVDD = New System.Windows.Forms.Button()
         Me.txtSlgLUT = New System.Windows.Forms.TextBox()
+        Me.txtSLgDvdd = New System.Windows.Forms.TextBox()
         Me.txtFile_project = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtFileDVDD = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.txtSLgDvdd = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -79,7 +79,7 @@ Partial Class frmNewProject
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.chkMaDVDDMoi)
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.cboColumnName)
         Me.GroupBox1.Controls.Add(Me.btnBrowseProject)
         Me.GroupBox1.Controls.Add(Me.btnBrowseDVDD)
         Me.GroupBox1.Controls.Add(Me.txtSlgLUT)
@@ -113,13 +113,13 @@ Partial Class frmNewProject
         Me.chkMaDVDDMoi.Text = "Sử dụng cột mã mới"
         Me.chkMaDVDDMoi.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'cboColumnName
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(213, 99)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(163, 24)
-        Me.ComboBox1.TabIndex = 3
+        Me.cboColumnName.FormattingEnabled = True
+        Me.cboColumnName.Location = New System.Drawing.Point(213, 99)
+        Me.cboColumnName.Name = "cboColumnName"
+        Me.cboColumnName.Size = New System.Drawing.Size(163, 24)
+        Me.cboColumnName.TabIndex = 3
         '
         'btnBrowseProject
         '
@@ -148,6 +148,14 @@ Partial Class frmNewProject
         Me.txtSlgLUT.Name = "txtSlgLUT"
         Me.txtSlgLUT.Size = New System.Drawing.Size(163, 22)
         Me.txtSlgLUT.TabIndex = 0
+        '
+        'txtSLgDvdd
+        '
+        Me.txtSLgDvdd.Location = New System.Drawing.Point(213, 137)
+        Me.txtSLgDvdd.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtSLgDvdd.Name = "txtSLgDvdd"
+        Me.txtSLgDvdd.Size = New System.Drawing.Size(163, 22)
+        Me.txtSLgDvdd.TabIndex = 4
         '
         'txtFile_project
         '
@@ -203,14 +211,6 @@ Partial Class frmNewProject
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Số lượng kiểu sử dụng ( LUT)"
         '
-        'txtSLgDvdd
-        '
-        Me.txtSLgDvdd.Location = New System.Drawing.Point(213, 137)
-        Me.txtSLgDvdd.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.txtSLgDvdd.Name = "txtSLgDvdd"
-        Me.txtSLgDvdd.Size = New System.Drawing.Size(163, 22)
-        Me.txtSLgDvdd.TabIndex = 4
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -248,7 +248,7 @@ Partial Class frmNewProject
     Friend WithEvents btnBrowseDVDD As System.Windows.Forms.Button
     Friend WithEvents txtFileDVDD As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboColumnName As System.Windows.Forms.ComboBox
     Friend WithEvents chkMaDVDDMoi As System.Windows.Forms.CheckBox
     Friend WithEvents btnBrowseProject As System.Windows.Forms.Button
     Friend WithEvents txtFile_project As System.Windows.Forms.TextBox

@@ -128,7 +128,7 @@ Public Class FrmMain
             Next
         Next
         st_PT_Hammuctieu = st_PT_Hammuctieu & " ;"
-        'MsgBox(st_PT_Hammuctieu)
+        'MsgBox(st_PT_Hammuctieu)  xc
     End Sub
     Private Sub createRangbuocDientichTN_LUT()
         ' Ràng buộc tổng diện tích của LUT (i) >= diện tích tối thiểu yêu cầu của LUT (i)
