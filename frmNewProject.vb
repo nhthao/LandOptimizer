@@ -203,9 +203,8 @@ Public Class frmNewProject
         txtFileDVDD.Text = fopen.FileName
         readShapefile(v_fname)
         FrmMain.v_fileDVDD = v_fname
-        ' Mo file thuoc tinh
         ' Doc thuoc tinh DVDD tu dang dbf cua ban do
-        'load_dbf_shp()
+
         Dim cnn As New System.Data.OleDb.OleDbConnection
         Dim da As New System.Data.OleDb.OleDbDataAdapter
 
